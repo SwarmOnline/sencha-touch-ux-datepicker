@@ -1,3 +1,11 @@
+/*
+ * Originally written by Bruno Alexandre, 26.03.2010, twitter.com/balexandre,
+ * balexandre.com,  abruno.in.dk [at] gmail.com
+ *
+ * Ported to Sencha Touch by Ondrej Jirman <megous@megous.com>, 2011 (for
+ * CodeBerry s.r.o.)
+ */
+
 Ext.ns('Ext.ux');
 
 /**
