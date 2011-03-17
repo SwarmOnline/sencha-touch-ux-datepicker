@@ -43,7 +43,7 @@ Ext.ux.DatePicker = Ext.extend(Ext.Panel, {
 		if (Ext.isDate(v)) {
 			this.value = v;
 		} else {
-			this.value = new Date();
+			this.value = null;
 		}
 
 		this.refresh();
@@ -81,9 +81,12 @@ Ext.ux.DatePicker = Ext.extend(Ext.Panel, {
 	},
 
 	refresh: function() {
-		this.body.update(this.generateCalendar(this.value.getMonth(), this.value.getFullYear()));
+		var d = this.value || new Date();
+		this.body.update(this.generateCalendar(d.getMonth(), d.getFullYear()));
 		this.setToday();
-		this.setSelected(this.value);
+		if (this.value) {
+			this.setSelected(this.value);
+		}
 	},
 
 	dayMarkup: function(format,day,month,year,column) {
