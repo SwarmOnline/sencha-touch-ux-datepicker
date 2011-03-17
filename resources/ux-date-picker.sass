@@ -42,20 +42,35 @@
     +linear-gradient(color-stops(#d8d7db, #d3d2d7))
     +text-shadow(white, 1px, 1px, 1px)
   
-    &.prevmonth, &.nextmonth
-      color: #89909A
-
     &.today
+      $c: #7188a8
       color: white
-      background: #7188a8
-      +box-shadow(#244065, 0px, 0px, 8px, 0, inset)
-      +text-shadow(none)
+      +text-shadow(#333, 1px, 1px, 2px)
+      border: 1px solid black
+      background: $c
+      +linear-gradient(color-stops(darken($c, 20%), $c 10%, $c 90%, lighten($c, 20%)))
+
+    &.weekend
+      +linear-gradient(color-stops(darken(#d8d7db, 6%), darken(#d3d2d7, 6%)))
 
     &.selected
+      $c: #1980e5
       color: white
-      background: #1980e5
-      +box-shadow(#0432af, 0px, 0px, 8px, 0, inset)
-      +text-shadow(none)
+      +text-shadow(#333, 1px, 1px, 2px)
+      border: 1px solid black
+      background: $c
+      +linear-gradient(color-stops(lighten($c, 10%) 50%, $c 51%, darken($c, 10%)))
+
+    &.today.selected
+      $c: #1980e5
+      color: white
+      +text-shadow(#333, 1px, 1px, 2px)
+      border: 1px solid black
+      background: $c
+      +linear-gradient(color-stops(darken($c, 20%), $c 10%, $c 90%, lighten($c, 20%)))
+
+    &.prevmonth, &.nextmonth
+      color: #89909A
 
   thead
     +linear-gradient(color-stops(#f5f5f5, #cfcfd3))
@@ -64,7 +79,7 @@
       font-size: 9px
       vertical-align: bottom
       padding-bottom: 3px
-      color: #6c6c6c
+      color: #3F4E5E
       text-align: center
       height: 46px
       +text-shadow(white, 1px, 1px, 1px)
@@ -79,6 +94,7 @@
 
       span
         font-size: 20px
+        font-weight: bold
         height: 30px
         left: 14.5%
         position: absolute
