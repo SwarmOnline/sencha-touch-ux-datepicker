@@ -64,15 +64,7 @@ Ext.ux.DatePicker = Ext.extend(Ext.Panel, {
 
 		// handle events
 		this.body.on("click", function(e, t) {
-			t = Ext.fly(t);
-			this.removeSelectedCell();
-			Ext.fly(t).addCls('selected');
-			var clickedDate = this.getCellDate(t);
-			this.setToday();
-
-			if (t.hasCls('prevmonth') || t.hasCls('nextmonth')) {
-				this.setValue(clickedDate);
-			}
+			this.setValue(this.getCellDate(Ext.fly(t)));
 		}, this, {delegate: 'td'});
 
 		this.body.on("click", function(e, t) {
@@ -192,7 +184,7 @@ Ext.ux.DatePicker = Ext.extend(Ext.Panel, {
 
 	stringToDate: function(dateString) {
 		var a = dateString.split('-');
-		return new Date(a[0], (a[1]-1), a[2]);
+		return new Date(Number(a[0]), (a[1]-1), Number(a[2]));
 	},
 
 	dateToString: function(date) {
