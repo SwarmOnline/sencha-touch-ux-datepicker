@@ -143,6 +143,7 @@ Ext.ux.DatePicker = Ext.extend(Ext.Panel, {
 		this_month += '<th>' + this.days[(4+x)%7]+'</th>';
 		this_month += '<th>' + this.days[(5+x)%7]+'</th>';
 		this_month += '<th class="goto-nextmonth">' + this.days[(6+x)%7]+'</th>';
+		this_month += '</tr>';
 		this_month += '</thead>';
 
 		this_month += '<tbody>';
@@ -173,6 +174,7 @@ Ext.ux.DatePicker = Ext.extend(Ext.Panel, {
 
 		this_month += '</tr>';
 		this_month += '</tbody>';
+		this_month += '</table>';
 
 		//this_month += '<tfoot><tr><th colspan="7">&nbsp;</th></tr></tfoot>';
 
