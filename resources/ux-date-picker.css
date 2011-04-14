@@ -7,11 +7,10 @@
 /* line 11, ux-date-picker.sass */
 .ux-date-picker {
   color: #3f4e5e;
-  float: left;
   background-color: white;
   width: 100%;
 }
-/* line 19, ux-date-picker.sass */
+/* line 18, ux-date-picker.sass */
 .ux-date-picker table {
   width: 100%;
   position: relative;
@@ -19,17 +18,17 @@
   table-layout: fixed;
   font-size: 20px;
 }
-/* line 28, ux-date-picker.sass */
+/* line 27, ux-date-picker.sass */
 .ux-date-picker tbody td {
   border-bottom: 1px solid #a3a7af;
   border-right: 1px solid #a3a7af;
   border-top: 1px solid white;
 }
-/* line 32, ux-date-picker.sass */
+/* line 31, ux-date-picker.sass */
 .ux-date-picker tbody td:last-child {
   border-right: 0px;
 }
-/* line 36, ux-date-picker.sass */
+/* line 35, ux-date-picker.sass */
 .ux-date-picker td {
   font-weight: bold;
   height: 43px;
@@ -41,7 +40,7 @@
   background-image: linear-gradient(top, #d8d7db 0%, #d3d2d7 100%);
   text-shadow: white 1px 1px 1px;
 }
-/* line 45, ux-date-picker.sass */
+/* line 44, ux-date-picker.sass */
 .ux-date-picker td.today {
   color: white;
   text-shadow: #333333 1px 1px 2px;
@@ -51,13 +50,13 @@
   background-image: -moz-linear-gradient(top, #44566f 0%, #7188a8 10%, #7188a8 90%, #b0bdcf 100%);
   background-image: linear-gradient(top, #44566f 0%, #7188a8 10%, #7188a8 90%, #b0bdcf 100%);
 }
-/* line 53, ux-date-picker.sass */
+/* line 52, ux-date-picker.sass */
 .ux-date-picker td.weekend {
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #c8c7cd), color-stop(100%, #c3c2c9));
   background-image: -moz-linear-gradient(top, #c8c7cd 0%, #c3c2c9 100%);
   background-image: linear-gradient(top, #c8c7cd 0%, #c3c2c9 100%);
 }
-/* line 56, ux-date-picker.sass */
+/* line 55, ux-date-picker.sass */
 .ux-date-picker td.selected {
   color: white;
   text-shadow: #333333 1px 1px 2px;
@@ -67,7 +66,7 @@
   background-image: -moz-linear-gradient(top, #4699eb 50%, #1980e5 51%, #1466b7 100%);
   background-image: linear-gradient(top, #4699eb 50%, #1980e5 51%, #1466b7 100%);
 }
-/* line 64, ux-date-picker.sass */
+/* line 63, ux-date-picker.sass */
 .ux-date-picker td.today.selected {
   color: white;
   text-shadow: #333333 1px 1px 2px;
@@ -77,17 +76,17 @@
   background-image: -moz-linear-gradient(top, #0f4d89 0%, #1980e5 10%, #1980e5 90%, #74b3f0 100%);
   background-image: linear-gradient(top, #0f4d89 0%, #1980e5 10%, #1980e5 90%, #74b3f0 100%);
 }
-/* line 72, ux-date-picker.sass */
+/* line 71, ux-date-picker.sass */
 .ux-date-picker td.prevmonth, .ux-date-picker td.nextmonth {
   color: #89909a;
 }
-/* line 75, ux-date-picker.sass */
+/* line 74, ux-date-picker.sass */
 .ux-date-picker thead {
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f5f5f5), color-stop(100%, #cfcfd3));
   background-image: -moz-linear-gradient(top, #f5f5f5 0%, #cfcfd3 100%);
   background-image: linear-gradient(top, #f5f5f5 0%, #cfcfd3 100%);
 }
-/* line 78, ux-date-picker.sass */
+/* line 77, ux-date-picker.sass */
 .ux-date-picker thead th {
   font-size: 9px;
   vertical-align: bottom;
@@ -97,17 +96,17 @@
   height: 46px;
   text-shadow: white 1px 1px 1px;
 }
-/* line 87, ux-date-picker.sass */
+/* line 86, ux-date-picker.sass */
 .ux-date-picker thead th:first-child {
   background: url(larr.png) center center no-repeat;
   cursor: pointer;
 }
-/* line 91, ux-date-picker.sass */
+/* line 90, ux-date-picker.sass */
 .ux-date-picker thead th:last-child {
   background: url(rarr.png) center center no-repeat;
   cursor: pointer;
 }
-/* line 95, ux-date-picker.sass */
+/* line 94, ux-date-picker.sass */
 .ux-date-picker thead th span {
   font-size: 20px;
   font-weight: bold;
