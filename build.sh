@@ -1,3 +1,3 @@
 #!/bin/sh
 
-compass watch --force -q --boring --sass-dir resources --css-dir resources
+compass compile --force --boring --sass-dir resources --css-dir resources -s compact -e production
