@@ -12,15 +12,19 @@ Ext.ns('Ext.ux');
  * iCalendar like date picker component.
  *
  * @cfg {Date} value Initially selected date (default is today)
- * @cfg {[String]} days Day names.
- * @cfg {[String]} months Month names.
+ * @cfg {String[]} days Day names.
+ * @cfg {String[]} months Month names.
  * @cfg {Number} weekstart Starting day of the week. (1 for monday, 7 for sunday)
+ * @cfg {Date} minDate The lowest selectable date.
+ * @cfg {Date} maxDate The highest selectable date.
  */
 Ext.ux.DatePicker = Ext.extend(Ext.Panel, {
 
 	days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], 
 	months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], 
 	cls: 'ux-date-picker',
+	minDate: null,
+	maxDate: null,
 
 	/**
 	 * Create new date picker.
@@ -32,9 +36,13 @@ Ext.ux.DatePicker = Ext.extend(Ext.Panel, {
 			weekstart: 1
 		});
 
+
 		this.addEvents('refresh');
 
 		Ext.ux.DatePicker.superclass.constructor.call(this, config);
+
+		this.minDate = this.minDate ? this.minDate.clearTime(true) : null;
+		this.maxDate = this.maxDate ? this.maxDate.clearTime(true) : null;
 	},
 
 	/**
@@ -66,7 +74,11 @@ Ext.ux.DatePicker = Ext.extend(Ext.Panel, {
 
 		// handle events
 		this.body.on("click", function(e, t) {
-			this.setValue(this.getCellDate(Ext.fly(t)));
+			t = Ext.fly(t);
+
+			if (!t.hasCls('unselectable')) {
+				this.setValue(this.getCellDate(t));
+			}
 		}, this, {delegate: 'td'});
 
 		this.body.on("click", function(e, t) {
@@ -106,6 +118,11 @@ Ext.ux.DatePicker = Ext.extend(Ext.Panel, {
 		}
 
 		var datetime = year+'-'+(month+1)+'-'+day;
+		var date = Date.parse(datetime, 'Y-m-d');
+
+		if ((this.minDate && date < this.minDate) || (this.maxDate && date > this.maxDate)) {
+			classes.push('unselectable');
+		}
 
 		var this_day = '<td class="' + classes.join(' ') + '" datetime="' + datetime + '">';
 		this_day += day;
@@ -237,6 +254,22 @@ Ext.ux.DatePicker = Ext.extend(Ext.Panel, {
 		var v = this.value || new Date();
 
 		var newDay = new Date(v.getFullYear(), v.getMonth() + delta, day);
+
+		if (this.minDate && newDay.getLastDateOfMonth() < this.minDate) {
+			return;
+		}
+
+		if (this.maxDate && newDay.getFirstDateOfMonth() > this.maxDate) {
+			return;
+		}
+
+		if (this.minDate && newDay < this.minDate) {
+			newDay = this.minDate.clone();
+		}
+
+		if (this.maxDate && newDay > this.maxDate) {
+			newDay = this.maxDate.clone();
+		}
 
 		this.setValue(newDay);
 	}
