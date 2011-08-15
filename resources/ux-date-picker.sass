@@ -41,6 +41,9 @@
     +background-image(linear-gradient(#d8d7db, #d3d2d7))
     +text-shadow(white 1px 1px 1px)
   
+    &.weekend
+      +background-image(linear-gradient(darken(#d8d7db, 6%), darken(#d3d2d7, 6%)))
+
     &.today
       $c: #7188a8
       color: white
@@ -48,9 +51,6 @@
       border: 1px solid black
       background: $c
       +background-image(linear-gradient(darken($c, 20%), $c 10%, $c 90%, lighten($c, 20%)))
-
-    &.weekend
-      +background-image(linear-gradient(darken(#d8d7db, 6%), darken(#d3d2d7, 6%)))
 
     &.unselectable
       color: #89909A

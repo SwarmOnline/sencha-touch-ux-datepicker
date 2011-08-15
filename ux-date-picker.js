@@ -107,18 +107,18 @@ Ext.ux.DatePicker = Ext.extend(Ext.Panel, {
 
 	dayMarkup: function(format,day,month,year,column) {
 		var classes = ['day'];
-		if ( format === 0 ) {
+		if (format === 0) {
 			classes.push('prevmonth');
-		} else if ( format == 9 ) {
+		} else if (format == 9) {
 			classes.push('nextmonth');
 		}
 
-		if ( column===0 || column==6 ) {
+		if (column === 0 || column == 6) {
 			classes.push('weekend');
 		}
 
-		var datetime = year+'-'+(month+1)+'-'+day;
-		var date = Date.parse(datetime, 'Y-m-d');
+		var datetime = year + '-' + (month + 1) + '-' + day;
+		var date = new Date(year, month, day);
 
 		if ((this.minDate && date < this.minDate) || (this.maxDate && date > this.maxDate)) {
 			classes.push('unselectable');
