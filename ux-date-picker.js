@@ -25,6 +25,7 @@ Ext.ux.DatePicker = Ext.extend(Ext.Panel, {
 	cls: 'ux-date-picker',
 	minDate: null,
 	maxDate: null,
+	autoHeight: true,
 
 	/**
 	 * Create new date picker.
@@ -97,6 +98,9 @@ Ext.ux.DatePicker = Ext.extend(Ext.Panel, {
 	refresh: function() {
 		var d = this.value || new Date();
 		this.body.update(this.generateCalendar(d.getMonth(), d.getFullYear()));
+		// will force repaint() on iPod Touch 4G
+		this.body.getHeight();
+
 		this.setToday();
 		if (this.value) {
 			this.setSelected(this.value);
