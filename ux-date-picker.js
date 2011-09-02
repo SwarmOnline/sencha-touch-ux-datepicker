@@ -26,6 +26,11 @@ Ext.ux.DatePicker = Ext.extend(Ext.Panel, {
 	minDate: null,
 	maxDate: null,
 	autoHeight: true,
+	
+	store: null,
+	storeDateField: 'date',
+	eventTpl: new Ext.XTemplate('<div class="event-wrapper"><tpl for="."><span class="event"></span></tpl></div>'),
+	
 
 	/**
 	 * Create new date picker.
@@ -38,7 +43,7 @@ Ext.ux.DatePicker = Ext.extend(Ext.Panel, {
 		});
 
 
-		this.addEvents('refresh');
+		this.addEvents('refresh', 'selectionchange');
 
 		Ext.ux.DatePicker.superclass.constructor.call(this, config);
 
@@ -51,6 +56,8 @@ Ext.ux.DatePicker = Ext.extend(Ext.Panel, {
 	 * @cfg {Date} v Date to select.
 	 */
 	setValue: function(v) {
+		this.previousValue = this.value;
+		
 		if (Ext.isDate(v)) {
 			this.value = v;
 		} else {
@@ -132,9 +139,33 @@ Ext.ux.DatePicker = Ext.extend(Ext.Panel, {
 
 		var this_day = '<td class="' + classes.join(' ') + '" datetime="' + datetime + '">';
 		this_day += day;
+		
+		// include Event markup
+		this_day += this.dayEventMarkup(date);
+		
 		this_day += '</td>';
 
 		return this_day;
+	},
+	
+	/**
+	 * Returns an HTML string of event 'dots' to be included in each day cell
+	 * @param {Object} date
+	 */
+	dayEventMarkup: function(date){
+		
+		// get the dateFormat the Model's date field uses
+		var dateFormat = this.store.model.prototype.fields.findBy(function(item){
+			return item.name === this.storeDateField;
+		}, this).dateFormat;
+		
+		// filter the store by the current date
+		this.store.filterBy(function(record, id){
+			return record.get(this.storeDateField).format(dateFormat) === date.format(dateFormat);	
+		}, this);
+		
+		// generate the template using the filtered store's records
+		return this.eventTpl.apply(this.store.getRange());		
 	},
 
 	monthLength: function(month, year) {
@@ -241,8 +272,18 @@ Ext.ux.DatePicker = Ext.extend(Ext.Panel, {
 			var clickedDate = this.getCellDate(td);
 			if (!td.hasCls("prevmonth") && !td.hasCls("nextmonth") && this.sameDay(date, clickedDate)) {
 				td.addCls('selected');
+					
+				if((this.value && this.previousValue) && !this.sameDay(this.value, this.previousValue)){
+					this.fireEvent('selectionchange', this.value);	
+				}
 			}
 		}, this);
+		
+		// if no date was selected (i.e. no cell present with the 'selected' class) then it 
+		// isn't in this month and so we must refresh the view completely
+		if(this.body.select('td.selected').elements.length === 0){
+			this.refresh();
+		}
 
 		this.setToday();
 	},

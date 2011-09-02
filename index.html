@@ -1,36 +1,67 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-    <link rel="stylesheet" type="text/css" href="sencha-touch.css" media="all"/>
-    <script src="sencha-touch.js" type="text/javascript" language="JavaScript"></script>
-
-    <link rel="stylesheet" type="text/css" href="resources/ux-date-picker.css" media="all"/>
-    <script src="ux-date-picker.js" type="text/javascript" language="JavaScript"></script>
-
-    <script>
-
-Ext.setup({
-	onReady: function() {
-		Ext.Ajax.defaultHeaders = {
-			'Content-Type': 'application/json; charset=UTF-8'
-		};
-
-                var dp = new Ext.ux.DatePicker({
-                  fullscreen: true,
-                  minDate: (new Date()).add(Date.DAY, -40),
-                  maxDate: (new Date()).add(Date.DAY, 55)
-                });
-	}
-});
-
-     </script>
-    
-    <title></title>
-  </head>
-  <body>
-
-  </body>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" type="text/css" href="http://dev.sencha.com/deploy/touch/resources/css/sencha-touch.css" media="all"/>
+        <script src="http://dev.sencha.com/deploy/touch/sencha-touch.js" type="text/javascript" language="JavaScript">
+        </script>
+        <link rel="stylesheet" type="text/css" href="resources/ux-date-picker.css" media="all"/>
+        <script src="ux-date-picker.js" type="text/javascript" language="JavaScript">
+        </script>
+        <script>
+            
+            Ext.setup({
+                onReady: function(){
+                    Ext.Ajax.defaultHeaders = {
+                        'Content-Type': 'application/json; charset=UTF-8'
+                    };
+                    
+                    Ext.regModel('Event', {
+                        fields: [{
+                            name: 'date',
+							type: 'date',
+							dateFormat: 'c'
+                        }, {
+							name: 'title'
+						}]
+                    });
+                    
+                    var store = new Ext.data.Store({
+                        model: 'Event',
+                        data: [{
+                            date: '2011-09-04T00:00:00+01:00',
+							title: 'test'
+                        }, {
+                            date: '2011-09-04T00:00:00+01:00',
+							title: 'test'
+                        }, {
+                            date: '2011-09-25T00:00:00+01:00',
+							title: 'test'
+                        }, {
+                            date: '2011-09-11T00:00:00+01:00',
+							title: 'test'
+                        }]
+                    });
+                    
+                    
+                    dp = new Ext.ux.DatePicker({
+                        fullscreen: true,
+                        minDate: (new Date()).add(Date.DAY, -40),
+                        maxDate: (new Date()).add(Date.DAY, 55),
+						store: store
+                    });
+                    
+                    dp.on('selectionchange', function(date){
+                        console.log(date);
+                    });
+                    
+                }
+                
+                
+            });
+        </script>
+        <title></title>
+    </head>
+    <body>
+    </body>
 </html>
