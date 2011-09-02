@@ -57,7 +57,9 @@ Ext.ux.DatePicker = Ext.extend(Ext.Panel, {
 			this.value = null;
 		}
 
-		this.refresh();
+		if (this.value) {
+			this.setSelected(this.value);
+		}
 	},
 
 	/**
@@ -276,5 +278,7 @@ Ext.ux.DatePicker = Ext.extend(Ext.Panel, {
 		}
 
 		this.setValue(newDay);
+		
+		this.refresh();
 	}
 });
